@@ -2,8 +2,7 @@
 
 players = []
 allowed_moves = (1..9)
-pmoves = [[5],[6]]
-
+pmoves = [[1,5,9,6],[6,4,3]]
 wining_moves = [[1,5,9],[7,5,3],[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9]]
 
 
@@ -43,8 +42,15 @@ players.each_with_index do |name, index|
           pmoves[index] << pinput 
           puts "stored : pmoves[#{index}]#{pmoves[index]}"
         else 
-          puts "#{name}, enter a valid move"
+          puts !pmoves[index].any?{|oldmove| oldmove == pinput} ? "#{name}, enter a valid move" : "#{name}, Move is takened!"
           pinput = nil
+      end
+#pmoves = [[1,5,9,6],[6,4,3]]
+#wining_moves = [[1,5,9],[7,5,3],[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9]]
+      pmoves[index].each do |invimove|
+         winning_moves.inject do |total,array|
+          array.any? { |i| i == invimove }
+         end
       end
   end
 
