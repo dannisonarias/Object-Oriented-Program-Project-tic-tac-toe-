@@ -36,7 +36,6 @@ total_matches = 0
 
   #loop until winning or draw
   while winner == -1 
-
     #looping through each player to get the move
     players.each_with_index do |name, index|
       pinput = nil
@@ -58,6 +57,7 @@ total_matches = 0
           winning_moves.each_with_index do |array|
           wins = true if (array - pmoves[index]).empty?
           winner = index if wins
+          winner = -2 if ( pmoves[0].length + pmoves[1].length == 9)
           wins = false
           #<---
         end
@@ -77,16 +77,15 @@ total_matches = 0
       end
     end 
   end
-
-puts "HEY. Congratulations #{players[winner]}, great match!"
-  # puts "\n\n\n <example>"
-  # puts '  0 |   |  '
-  # puts '    | X |  '
-  # puts "    |   | X \n\n\n"
-  puts 'game is over'
+  puts winner == -2 ? "Game is a draw" : "HEY. Congratulations #{players[winner]}, great match!"
+  # cleaning board method
+  pmoves = [[],[]]
+  board = ['  ','  ','  ','  ','  ','  ','  ','  ','  ']
+  winner = -1
+  # <---
+  puts 'Game is over'
   puts 'do you want to play again Y/N?'
   input = gets.chomp # exit
-  p "good choice #{input}"
 end
 
 p 'Thank you for playing'
