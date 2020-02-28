@@ -4,8 +4,9 @@ players = []
 allowed_moves = (1..9)
 pmoves = [[],[]]
 winning_moves = [[1,5,9],[7,5,3],[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9]]
+board = ['  ','  ','  ','  ','  ','  ','  ','  ','  ']
 
-
+puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
 puts '--------------'
 
@@ -15,6 +16,11 @@ puts 'Type exit'
 
 input = gets.chomp
 exit if input == 'exit'
+
+  puts "Choose your position using the following scheme"
+  puts '  1 | 2 | 3 '
+  puts '  4 | 5 | 6 '
+  puts "  7 | 8 | 9 \n\n\n"
 
 while players[0].nil? || players[1].nil?
   puts 'Player 1. Enter your name'
@@ -55,6 +61,19 @@ total_matches = 0
           wins = false
           #<---
         end
+        pmoves[0].each do |x|
+          board [x-1] = ' X'
+        end
+        pmoves[1].each do |x|
+          board [x-1] = ' O'
+        end
+
+        # board = ['X','O','X','','','X','X','O','']
+        puts ''
+        puts "#{board[0]}|#{board[1]}|#{board[2]}" 
+        puts "#{board[3]}|#{board[4]}|#{board[5]}" 
+        puts "#{board[6]}|#{board[7]}|#{board[8]}"
+        puts ''
       end
     end 
   end
