@@ -40,7 +40,6 @@ class GameLogic
   def check_win(index)
     @winning_moves.each do |array|
       @wins = true if (array - @pmoves[index]).empty?
-      # reset winner so that we can exit the while loop ->
       @winner = index if @wins
     end
   end

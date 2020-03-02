@@ -21,55 +21,43 @@ puts '  1 | 2 | 3 '
 puts '  4 | 5 | 6 '
 puts "  7 | 8 | 9 \n\n\n"
 
-# Loop for playing the game untill the user decides to 'exit'
 until %w[exit N n].include? input
   tictactoe.winner = -1
 
-  # getting game player 1 and player 2 names from tictactoe Class. Updating instance variable @players
   tictactoe.your_name
 
-  # loop until winning or draw
   while tictactoe.winner == -1
-    # looping through each player to get the move
     tictactoe.players.each_with_index do |name, index|
       pinput = nil
-      # loop until correct move
       while pinput.nil? && tictactoe.winner == -1
         puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: "
         pinput = gets.chomp
 
-        # check if player has decided to 'exit'
         if pinput != 'exit'
 
-          # check if the players move is valid or position is takened
           pinput = pinput.to_i
           if tictactoe.allowed_move?(pinput, name) && tictactoe.not_occupied_move?(pinput, name)
             tictactoe.store_move(index)
           else
             pinput = nil
           end
-          # check if the players move is valid or position is takened
 
           tictactoe.check_win(index)
           tictactoe.check_draw
           displaying_board.print_board(tictactoe.pmoves)
         end
-        # check if player has decided to 'exit'
         tictactoe.winner = -3 if pinput == 'exit'
       end
     end
 
   end
 
-  # exit_messages , displaying if game was a draw, a win, or user exited
 
   tictactoe.exit_messages
 
-  # cleaning board method
   displaying_board.clear_board
   tictactoe.winner = -1
   tictactoe.new_game
-  # <---
 
   puts 'Game is over'
   puts 'do you want to play again Y/N?'
