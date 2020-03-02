@@ -9,9 +9,8 @@ allowed_moves = (1..9)
 pmoves = [[], []]
 winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
 board = array = Array.new(9) {'  '}
-
 tictactoe = GameLogic.new()
-display = TttDisplay.new()
+displaying_board = Display_Board.new(pmoves,board)
 
 puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
@@ -71,30 +70,16 @@ until %w[exit N n].include? input
           wins = false
         end
 
-        # code that sets the board -->
-        pmoves[0].each do |x|
-          board [x - 1] = ' X'
-        end
-        pmoves[1].each do |x|
-          board [x - 1] = ' O'
-        end
-        #<----
 
-        # DISPLAY THE BOARD --->
-        puts ''
-        puts "#{board[0]}|#{board[1]}|#{board[2]}"
-        puts "#{board[3]}|#{board[4]}|#{board[5]}"
-        puts "#{board[6]}|#{board[7]}|#{board[8]}"
-        puts ''
-        # DISPLAY THE BOARD <-----
-
+        displaying_board.print_board
       end
     end
+
   end
   puts winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{players[winner]}, great match!"
   # cleaning board method
   pmoves = [[], []]
-  board = ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ']
+  board = array = Array.new(9) {'  '}
   winner = -1
   players = [nil, nil]
   # <---

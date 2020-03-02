@@ -32,11 +32,32 @@ class GameLogic
 
 end
 
-class TttDisplay
+class Display_Board
 
-    def initialize
-      @board = Array.new(9) {'  '}
+    def initialize(pmoves,board)
+      @pmoves = pmoves
+      @board = board
     end
+
+    def print_board
+ # code that sets the board -->
+  @pmoves[0].each do |x|
+    @board [x - 1] = ' X'
+  end
+  @pmoves[1].each do |x|
+    @board [x - 1] = ' O'
+  end
+  #<----
+
+  # DISPLAY THE BOARD --->
+  puts ''
+  puts "#{@board[0]}|#{@board[1]}|#{@board[2]}"
+  puts "#{@board[3]}|#{@board[4]}|#{@board[5]}"
+  puts "#{@board[6]}|#{@board[7]}|#{@board[8]}"
+  puts ''
+  # DISPLAY THE BOARD <-----
+    end
+  end
 
 =begin 
     def BoardDisplay
@@ -56,4 +77,3 @@ class TttDisplay
       puts ''
     end 
 =end
-end
