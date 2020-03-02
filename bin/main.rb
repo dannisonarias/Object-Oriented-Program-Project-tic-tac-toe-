@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
-# rubocop:disable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
+# rubocop:disable Metrics/BlockNesting
 
 require_relative 'logic.rb'
-tictactoe = GameLogic.new()
+require_relative 'display.rb'
+tictactoe = GameLogic.new
 displaying_board = Display_Board.new(tictactoe.pmoves)
 
 puts 'WELCOME TO TIC TAC TOE'
@@ -34,26 +35,26 @@ until %w[exit N n].include? input
       pinput = nil
       # loop until correct move
       while pinput.nil? && tictactoe.winner == -1
-        puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: #{}"
+        puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: "
         pinput = gets.chomp
-       
-        #check if player has decided to 'exit'
+
+        # check if player has decided to 'exit'
         if pinput != 'exit'
 
           # check if the players move is valid or position is takened
           pinput = pinput.to_i
-          if tictactoe.AllowedMove?(pinput,name) && tictactoe.NotOcuppiedMove?(pinput,name)
+          if tictactoe.AllowedMove?(pinput, name) && tictactoe.NotOcuppiedMove?(pinput, name)
             tictactoe.StoreMove(index)
           else
             pinput = nil
           end
           # check if the players move is valid or position is takened
-          
+
           tictactoe.CheckWin(index)
-          tictactoe.CheckDraw    
+          tictactoe.CheckDraw
           displaying_board.print_board(tictactoe.pmoves)
         end
-        #check if player has decided to 'exit'
+        # check if player has decided to 'exit'
         tictactoe.winner = -3 if pinput == 'exit'
       end
     end
@@ -63,7 +64,7 @@ until %w[exit N n].include? input
   # exit_messages , displaying if game was a draw, a win, or user exited
 
   tictactoe.exit_messages
-  
+
   # cleaning board method
   displaying_board.clear_board
   tictactoe.winner = -1
@@ -80,4 +81,4 @@ p 'Thank you for playing'
 p 'closing ....'
 exit
 
-# rubocop:enable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
+# rubocop:enable Metrics/BlockNesting
