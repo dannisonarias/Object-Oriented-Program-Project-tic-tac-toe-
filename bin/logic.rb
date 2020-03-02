@@ -7,17 +7,21 @@ class GameLogic
         @allowed_moves = (1..9)
         @pmoves = [[], []]
         @winner = -1
+        @wins = false
     end
 
-=begin     def CheckWinner(index)
-    wins = false
-    @winning_moves.each do |array|
-      wins = true if (array - @pmoves[index]).empty?
-      @winner = index if wins
-      @winner = -2 if @pmoves[0].length + @pmoves[1].length == 9
-      wins = false
-    end 
-=end
+    def CheckWin(index)
+        @winning_moves.each do |array|
+        @wins = true if (array - @pmoves[index]).empty?
+        # reset winner so that we can exit the while loop ->
+        @winner = index if @wins
+        end
+    end
+
+    def CheckDraw
+        @winner = -2 if @pmoves[0].length + @pmoves[1].length == 9
+        @wins = false
+    end
 
     def GetNames
       while @players[0].nil? || @players[1].nil?
@@ -32,6 +36,7 @@ class GameLogic
     def NewGame
       @players = [nil, nil]
       @pmoves = [[], []]
+      @winner = -1
     end
 
 end

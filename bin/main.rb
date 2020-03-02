@@ -2,8 +2,6 @@
 # rubocop:disable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
 
 require_relative 'logic.rb'
-#require 'GameLogic'
-#require 'TttDisplay'
 players = []
 allowed_moves = (1..9)
 winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
@@ -30,18 +28,18 @@ puts "  7 | 8 | 9 \n\n\n"
 
 # Loop for playing the game
 until %w[exit N n].include? input
-  winner = -1
+  tictactoe.winner = -1
 
-  # getting game player 1 and player 2 names. Updating instance variable @players
+  # getting game player 1 and player 2 names from tictactoe Class. Updating instance variable @players
   tictactoe.GetNames
 
   # loop until winning or draw
-  while winner == -1
+  while tictactoe.winner == -1
     # looping through each player to get the move
     tictactoe.players.each_with_index do |name, index|
       pinput = nil
       # loop until correct move
-      while pinput.nil? && winner == -1
+      while pinput.nil? && tictactoe.winner == -1
         puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: #{allowed_moves}"
         pinput = gets.chomp.to_i
         p "Display_Board , user has selected #{pinput}"
@@ -56,34 +54,26 @@ until %w[exit N n].include? input
           end
           pinput = nil
         end
-        # checking if players moves has a winning combination --->
-        wins = false
-        winning_moves.each do |array|
-          wins = true if (array - tictactoe.pmoves[index]).empty?
-          # reset winner so that we can exit the while loop ->
-          winner = index if wins
-          #<-
 
-          #Checking for a draw game -->
-          winner = -2 if tictactoe.pmoves[0].length + tictactoe.pmoves[1].length == 9
-          #<---
-          wins = false
-        end
+        tictactoe.CheckWin(index)
+        tictactoe.CheckDraw
+       
         displaying_board.print_board
       end
     end
 
   end
-  puts winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{players[winner]}, great match!"
+  puts tictactoe.winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{players[tictactoe.winner]}, great match!"
   # cleaning board method
   displaying_board.clear_board
-  winner = -1
+  tictactoe.winner = -1
   tictactoe.NewGame
   # <---
 
   puts 'Game is over'
   puts 'do you want to play again Y/N?'
   input = gets.chomp # exit
+
 end
 
 p 'Thank you for playing'
