@@ -1,11 +1,17 @@
 #!/usr/bin/env ruby
 # rubocop:disable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
 
+require_relative 'logic.rb'
+#require 'GameLogic'
+#require 'TttDisplay'
 players = []
 allowed_moves = (1..9)
 pmoves = [[], []]
 winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
-board = ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ']
+board = array = Array.new(9) {'  '}
+
+tictactoe = GameLogic.new()
+display = TttDisplay.new()
 
 puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
@@ -27,17 +33,13 @@ puts "  7 | 8 | 9 \n\n\n"
 until %w[exit N n].include? input
   winner = -1
 
-  while players[0].nil? || players[1].nil?
-    puts 'Player 1. Enter your name'
-    players[0] = gets.chomp
-    puts 'Player 2. Enter your name'
-    players[1] = gets.chomp
-  end
+  # getting game player 1 and player 2 names. Updating instance variable @players
+  tictactoe.GetNames
 
   # loop until winning or draw
   while winner == -1
     # looping through each player to get the move
-    players.each_with_index do |name, index|
+    tictactoe.players.each_with_index do |name, index|
       pinput = nil
       # loop until correct move
       while pinput.nil? && winner == -1
