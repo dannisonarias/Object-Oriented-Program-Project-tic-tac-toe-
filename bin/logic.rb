@@ -39,6 +39,29 @@ class GameLogic
       @winner = -1
     end
 
+    def AllowedMove?(input,name)
+      @pinput = input
+      if @allowed_moves.any? { |move| @pinput == move }
+        return true
+      else
+        puts "#{name}, enter a valid move"
+        return false
+      end
+
+    end
+
+    def NotOcuppiedMove?(input,name)
+      @pinput = input
+      if @pmoves[0].none? { |oldmove| oldmove == @pinput } && @pmoves[1].none? { |oldmove| oldmove == @pinput }
+        return true
+      else
+        puts "#{name}, Move is takened!"  
+      end
+    end
+
+    def StoreMove(index)
+      @pmoves[index] << @pinput
+    end
 end
 
 class Display_Board

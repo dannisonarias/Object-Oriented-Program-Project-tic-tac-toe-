@@ -2,21 +2,15 @@
 # rubocop:disable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
 
 require_relative 'logic.rb'
-players = []
-allowed_moves = (1..9)
-winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
-
-
 tictactoe = GameLogic.new()
 displaying_board = Display_Board.new(tictactoe.pmoves)
 
 puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
 puts '--------------'
-
 puts '1. New game'
 puts '2. Game Options'
-puts 'Type exit'
+puts 'Type exit to leave game'
 
 input = gets.chomp
 exit if input == 'exit'
@@ -40,30 +34,37 @@ until %w[exit N n].include? input
       pinput = nil
       # loop until correct move
       while pinput.nil? && tictactoe.winner == -1
-        puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: #{allowed_moves}"
-        pinput = gets.chomp.to_i
+        puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: #{}"
+        pinput = gets.chomp
         p "Display_Board , user has selected #{pinput}"
         # check if move valid and if is not warn already taken by any player or invalid move
-        if allowed_moves.any? { |move| pinput == move } && tictactoe.pmoves[0].none? { |oldmove| oldmove == pinput } && tictactoe.pmoves[1].none? { |oldmove| oldmove == pinput }
-          tictactoe.pmoves[index] << pinput
-        else
-          if tictactoe.pmoves[0].none? { |oldmove| oldmove == pinput } && tictactoe.pmoves[1].none? { |oldmove| oldmove == pinput }
-            puts "#{name}, enter a valid move"
+        if pinput != 'exit'
+          pinput = pinput.to_i
+          if tictactoe.AllowedMove?(pinput,name) && tictactoe.NotOcuppiedMove?(pinput,name)
+            tictactoe.StoreMove(index)
           else
-            puts "#{name}, Move is takened!"
+            pinput = nil
           end
-          pinput = nil
+          tictactoe.CheckWin(index)
+          tictactoe.CheckDraw    
+          displaying_board.print_board(tictactoe.pmoves)
         end
-
-        tictactoe.CheckWin(index)
-        tictactoe.CheckDraw
-       
-        displaying_board.print_board(tictactoe.pmoves)
+        tictactoe.winner = -3 if pinput == 'exit'
       end
     end
 
   end
-  puts tictactoe.winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{tictactoe.players[tictactoe.winner]}, great match!"
+
+  case tictactoe.winner
+  when -2
+    puts 'Game is a draw'
+  when -3
+    puts 'User Exit'
+  else
+    puts "HEY. Congratulations #{tictactoe.players[tictactoe.winner]}, great match!"
+  end
+
+  # puts tictactoe.winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{tictactoe.players[tictactoe.winner]}, great match!"
   # cleaning board method
   displaying_board.clear_board
   tictactoe.winner = -1
