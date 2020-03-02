@@ -46,7 +46,7 @@ until %w[exit N n].include? input
         puts "#{name}, #{pmoves[index]} please enter your move: #{allowed_moves}"
         pinput = gets.chomp.to_i
         p "Display_Board , user has selected #{pinput}"
-        # if below check if move valid and if is not already taken by any player
+        # check if move valid and if is not warn already taken by any player or invalid move
         if allowed_moves.any? { |move| pinput == move } && pmoves[0].none? { |oldmove| oldmove == pinput } && pmoves[1].none? { |oldmove| oldmove == pinput }
           pmoves[index] << pinput
         else
@@ -61,24 +61,33 @@ until %w[exit N n].include? input
         wins = false
         winning_moves.each do |array|
           wins = true if (array - pmoves[index]).empty?
+          # reset winner so that we can exit the while loop ->
           winner = index if wins
+          #<-
+
+          #Checking for a draw game -->
           winner = -2 if pmoves[0].length + pmoves[1].length == 9
+          #<---
           wins = false
-          # <---
         end
+
+        # code that sets the board -->
         pmoves[0].each do |x|
           board [x - 1] = ' X'
         end
         pmoves[1].each do |x|
           board [x - 1] = ' O'
         end
+        #<----
 
-        # board = ['X','O','X','','','X','X','O','']
+        # DISPLAY THE BOARD --->
         puts ''
         puts "#{board[0]}|#{board[1]}|#{board[2]}"
         puts "#{board[3]}|#{board[4]}|#{board[5]}"
         puts "#{board[6]}|#{board[7]}|#{board[8]}"
         puts ''
+        # DISPLAY THE BOARD <-----
+
       end
     end
   end
@@ -89,6 +98,7 @@ until %w[exit N n].include? input
   winner = -1
   players = [nil, nil]
   # <---
+
   puts 'Game is over'
   puts 'do you want to play again Y/N?'
   input = gets.chomp # exit

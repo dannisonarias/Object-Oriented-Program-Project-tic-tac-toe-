@@ -40,12 +40,6 @@ class TttDisplay
 
 =begin 
     def BoardDisplay
-      pmoves[0].each do |x|
-        board [x - 1] = ' X'
-      end
-      pmoves[1].each do |x|
-        board [x - 1] = ' O'
-      end
       puts ''
       puts "#{@board[0]}|#{@board[1]}|#{@board[2]}"
       puts "#{@board[3]}|#{@board[4]}|#{@board[5]}"
