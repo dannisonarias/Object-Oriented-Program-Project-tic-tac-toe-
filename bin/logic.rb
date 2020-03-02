@@ -22,7 +22,7 @@ class GameLogic
         @winner = -2 if @pmoves[0].length + @pmoves[1].length == 9
         @wins = false
     end
-
+    
     def GetNames
       while @players[0].nil? || @players[1].nil?
         puts 'Player 1. Enter your name'
@@ -62,6 +62,19 @@ class GameLogic
     def StoreMove(index)
       @pmoves[index] << @pinput
     end
+
+    def exit_messages
+      case @winner
+      when -2
+        puts 'Game is a draw'
+      when -3
+        puts 'User Exit'
+      else
+        puts "HEY. Congratulations #{@players[@winner]}, great match!"
+      end
+      
+    end
+
 end
 
 class Display_Board

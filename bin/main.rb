@@ -20,7 +20,7 @@ puts '  1 | 2 | 3 '
 puts '  4 | 5 | 6 '
 puts "  7 | 8 | 9 \n\n\n"
 
-# Loop for playing the game
+# Loop for playing the game untill the user decides to 'exit'
 until %w[exit N n].include? input
   tictactoe.winner = -1
 
@@ -36,35 +36,34 @@ until %w[exit N n].include? input
       while pinput.nil? && tictactoe.winner == -1
         puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: #{}"
         pinput = gets.chomp
-        p "Display_Board , user has selected #{pinput}"
-        # check if move valid and if is not warn already taken by any player or invalid move
+       
+        #check if player has decided to 'exit'
         if pinput != 'exit'
+
+          # check if the players move is valid or position is takened
           pinput = pinput.to_i
           if tictactoe.AllowedMove?(pinput,name) && tictactoe.NotOcuppiedMove?(pinput,name)
             tictactoe.StoreMove(index)
           else
             pinput = nil
           end
+          # check if the players move is valid or position is takened
+          
           tictactoe.CheckWin(index)
           tictactoe.CheckDraw    
           displaying_board.print_board(tictactoe.pmoves)
         end
+        #check if player has decided to 'exit'
         tictactoe.winner = -3 if pinput == 'exit'
       end
     end
 
   end
 
-  case tictactoe.winner
-  when -2
-    puts 'Game is a draw'
-  when -3
-    puts 'User Exit'
-  else
-    puts "HEY. Congratulations #{tictactoe.players[tictactoe.winner]}, great match!"
-  end
+  # exit_messages , displaying if game was a draw, a win, or user exited
 
-  # puts tictactoe.winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{tictactoe.players[tictactoe.winner]}, great match!"
+  tictactoe.exit_messages
+  
   # cleaning board method
   displaying_board.clear_board
   tictactoe.winner = -1
