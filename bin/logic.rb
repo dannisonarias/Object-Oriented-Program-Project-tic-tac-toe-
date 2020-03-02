@@ -1,6 +1,5 @@
 class GameLogic
-    attr_writer :pmoves
-    attr_accessor :winner, :players
+    attr_accessor :winner, :players, :pmoves
 
     def initialize()
         @players = []
@@ -30,50 +29,43 @@ class GameLogic
       true
     end
 
+    def NewGame
+      @players = [nil, nil]
+      @pmoves = [[], []]
+    end
+
 end
 
 class Display_Board
+    attr_writer :board
 
-    def initialize(pmoves,board)
-      @pmoves = pmoves
-      @board = board
+    def initialize(array)
+      @array = array
+      @board = Array.new(9) {'  '}
     end
 
     def print_board
- # code that sets the board -->
-  @pmoves[0].each do |x|
-    @board [x - 1] = ' X'
-  end
-  @pmoves[1].each do |x|
-    @board [x - 1] = ' O'
-  end
-  #<----
-
-  # DISPLAY THE BOARD --->
-  puts ''
-  puts "#{@board[0]}|#{@board[1]}|#{@board[2]}"
-  puts "#{@board[3]}|#{@board[4]}|#{@board[5]}"
-  puts "#{@board[6]}|#{@board[7]}|#{@board[8]}"
-  puts ''
-  # DISPLAY THE BOARD <-----
-    end
-  end
-
-=begin 
-    def BoardDisplay
+    # code that sets the board -->
+      @array[0].each do |x|
+        @board [x - 1] = ' X'
+      end
+      @array[1].each do |x|
+        @board [x - 1] = ' O'
+      end
+      #<----
+      # DISPLAY THE BOARD --->
       puts ''
       puts "#{@board[0]}|#{@board[1]}|#{@board[2]}"
       puts "#{@board[3]}|#{@board[4]}|#{@board[5]}"
       puts "#{@board[6]}|#{@board[7]}|#{@board[8]}"
       puts ''
+      # DISPLAY THE BOARD <-----
     end
 
-    def BoardDisplay_hash
+    def clear_board
+      @pmoves = [[], []]
+      @board = Array.new(9) {'  '}
+    end
+  end
 
-      puts ''
-      puts "#{@board_hash[:0]}|#{@board_hash[:1]}|#{@board_hash[:2]}"
-      puts "#{@board_hash[:3]}|#{@board_hash[:4]}|#{@board_hash[:5]}"
-      puts "#{@board_hash[:6]}|#{@board_hash[:7]}|#{@board_hash[:8]}"
-      puts ''
-    end 
-=end
+
