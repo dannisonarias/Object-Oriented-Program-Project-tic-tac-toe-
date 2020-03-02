@@ -4,7 +4,7 @@
 require_relative 'logic.rb'
 require_relative 'display.rb'
 tictactoe = GameLogic.new
-displaying_board = Display_Board.new(tictactoe.pmoves)
+displaying_board = DisplayBoard.new(tictactoe.pmoves)
 
 puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
