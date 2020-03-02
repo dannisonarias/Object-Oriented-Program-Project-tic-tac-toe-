@@ -52,7 +52,6 @@ until %w[exit N n].include? input
 
   end
 
-
   tictactoe.exit_messages
 
   displaying_board.clear_board
