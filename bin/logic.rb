@@ -3,14 +3,14 @@ class GameLogic
 
   def initialize()
     @players = []
-    @winning_moves = winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
+    @winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
     @allowed_moves = (1..9)
     @pmoves = [[], []]
     @winner = -1
     @wins = false
   end
 
-  def GetNames
+  def your_name
     while @players[0].nil? || @players[1].nil?
       puts 'Player 1. Enter your name'
       @players[0] = gets.chomp
@@ -20,7 +20,7 @@ class GameLogic
     true
   end
 
-  def NewGame
+  def new_game
     @players = [nil, nil]
     @pmoves = [[], []]
     @winner = -1
@@ -37,24 +37,24 @@ class GameLogic
     end
   end
 
-  def CheckWin(index)
+  def check_win(index)
     @winning_moves.each do |array|
       @wins = true if (array - @pmoves[index]).empty?
       # reset winner so that we can exit the while loop ->
       @winner = index if @wins
     end
-end
+  end
 
-  def CheckDraw
+  def check_draw
     @winner = -2 if @pmoves[0].length + @pmoves[1].length == 9
     @wins = false
   end
 
-  def StoreMove(index)
+  def store_move(index)
     @pmoves[index] << @pinput
   end
 
-  def AllowedMove?(input, name)
+  def allowed_move?(input, name)
     @pinput = input
     if @allowed_moves.any? { |move| @pinput == move }
       true
@@ -64,7 +64,7 @@ end
     end
   end
 
-  def NotOcuppiedMove?(input, name)
+  def not_occupied_move?(input, name)
     @pinput = input
     if @pmoves[0].none? { |oldmove| oldmove == @pinput } && @pmoves[1].none? { |oldmove| oldmove == @pinput }
       true

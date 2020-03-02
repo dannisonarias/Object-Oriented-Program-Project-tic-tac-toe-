@@ -26,7 +26,7 @@ until %w[exit N n].include? input
   tictactoe.winner = -1
 
   # getting game player 1 and player 2 names from tictactoe Class. Updating instance variable @players
-  tictactoe.GetNames
+  tictactoe.your_name
 
   # loop until winning or draw
   while tictactoe.winner == -1
@@ -43,15 +43,15 @@ until %w[exit N n].include? input
 
           # check if the players move is valid or position is takened
           pinput = pinput.to_i
-          if tictactoe.AllowedMove?(pinput, name) && tictactoe.NotOcuppiedMove?(pinput, name)
-            tictactoe.StoreMove(index)
+          if tictactoe.allowed_move?(pinput, name) && tictactoe.not_occupied_move?(pinput, name)
+            tictactoe.store_move(index)
           else
             pinput = nil
           end
           # check if the players move is valid or position is takened
 
-          tictactoe.CheckWin(index)
-          tictactoe.CheckDraw
+          tictactoe.check_win(index)
+          tictactoe.check_draw
           displaying_board.print_board(tictactoe.pmoves)
         end
         # check if player has decided to 'exit'
@@ -68,7 +68,7 @@ until %w[exit N n].include? input
   # cleaning board method
   displaying_board.clear_board
   tictactoe.winner = -1
-  tictactoe.NewGame
+  tictactoe.new_game
   # <---
 
   puts 'Game is over'
