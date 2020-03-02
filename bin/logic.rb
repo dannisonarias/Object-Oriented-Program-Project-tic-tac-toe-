@@ -49,8 +49,9 @@ class Display_Board
       @board = Array.new(9) {'  '}
     end
 
-    def print_board
+    def print_board(array)
     # code that sets the board -->
+      @array = array
       @array[0].each do |x|
         @board [x - 1] = ' X'
       end
@@ -68,7 +69,7 @@ class Display_Board
     end
 
     def clear_board
-      @pmoves = [[], []]
+      @array = [[], []]
       @board = Array.new(9) {'  '}
     end
   end

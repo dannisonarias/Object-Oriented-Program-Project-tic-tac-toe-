@@ -58,12 +58,12 @@ until %w[exit N n].include? input
         tictactoe.CheckWin(index)
         tictactoe.CheckDraw
        
-        displaying_board.print_board
+        displaying_board.print_board(tictactoe.pmoves)
       end
     end
 
   end
-  puts tictactoe.winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{players[tictactoe.winner]}, great match!"
+  puts tictactoe.winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{tictactoe.players[tictactoe.winner]}, great match!"
   # cleaning board method
   displaying_board.clear_board
   tictactoe.winner = -1
