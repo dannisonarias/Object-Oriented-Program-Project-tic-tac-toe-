@@ -1,21 +1,18 @@
 #!/usr/bin/env ruby
-# rubocop:disable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
+# rubocop:disable Metrics/BlockNesting
 
-players = []
-allowed_moves = (1..9)
-pmoves = [[], []]
-winning_moves = [[1, 5, 9], [7, 5, 3], [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
-board = ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ']
+require_relative '../lib/logic.rb'
+require_relative '../lib/display.rb'
+tictactoe = GameLogic.new
+displaying_board = DisplayBoard.new(tictactoe.pmoves)
 
 puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
 puts '--------------'
-
 puts '1. New game'
-puts '2. Game Options'
-puts 'Type exit'
+puts 'Type exit to leave game'
 
-input = gets.chomp
+input = gets.chomp.to_s.upcase
 exit if input == 'exit'
 
 puts 'Choose your position using the following scheme'
@@ -23,77 +20,62 @@ puts '  1 | 2 | 3 '
 puts '  4 | 5 | 6 '
 puts "  7 | 8 | 9 \n\n\n"
 
-# Loop for playing the game
-until %w[exit N n].include? input
-  winner = -1
+until %w[EXIT N NO].include? input
+  tictactoe.winner = -1
 
-  while players[0].nil? || players[1].nil?
+  if tictactoe.names_empty?
     puts 'Player 1. Enter your name'
-    players[0] = gets.chomp
+    tictactoe.players[0] = gets.chomp
     puts 'Player 2. Enter your name'
-    players[1] = gets.chomp
+    tictactoe.players[1] = gets.chomp
   end
 
-  # loop until winning or draw
-  while winner == -1
-    # looping through each player to get the move
-    players.each_with_index do |name, index|
+  while tictactoe.winner == -1
+    tictactoe.players.each_with_index do |name, index|
       pinput = nil
-      # loop until correct move
-      while pinput.nil? && winner == -1
-        puts "#{name}, #{pmoves[index]} please enter your move: #{allowed_moves}"
-        pinput = gets.chomp.to_i
-        p "Display_Board , user has selected #{pinput}"
-        # if below check if move valid and if is not already taken by any player
-        if allowed_moves.any? { |move| pinput == move } && pmoves[0].none? { |oldmove| oldmove == pinput } && pmoves[1].none? { |oldmove| oldmove == pinput }
-          pmoves[index] << pinput
-        else
-          if pmoves[0].none? { |oldmove| oldmove == pinput } && pmoves[1].none? { |oldmove| oldmove == pinput }
-            puts "#{name}, enter a valid move"
-          else
-            puts "#{name}, Move is takened!"
-          end
-          pinput = nil
-        end
-        # checking if players moves has a winning combination --->
-        wins = false
-        winning_moves.each do |array|
-          wins = true if (array - pmoves[index]).empty?
-          winner = index if wins
-          winner = -2 if pmoves[0].length + pmoves[1].length == 9
-          wins = false
-          # <---
-        end
-        pmoves[0].each do |x|
-          board [x - 1] = ' X'
-        end
-        pmoves[1].each do |x|
-          board [x - 1] = ' O'
-        end
+      while pinput.nil? && tictactoe.winner == -1
+        puts "#{name}, #{tictactoe.pmoves[index]} please enter your move: "
+        pinput = gets.chomp
 
-        # board = ['X','O','X','','','X','X','O','']
-        puts ''
-        puts "#{board[0]}|#{board[1]}|#{board[2]}"
-        puts "#{board[3]}|#{board[4]}|#{board[5]}"
-        puts "#{board[6]}|#{board[7]}|#{board[8]}"
-        puts ''
+        if pinput != 'exit'
+
+          pinput = pinput.to_i
+          if tictactoe.allowed_move?(pinput, name) && tictactoe.not_occupied_move?(pinput, name)
+            tictactoe.store_move(index)
+          else
+            pinput = nil
+          end
+
+          puts tictactoe.invalid_move_messages
+          tictactoe.check_win(index)
+          tictactoe.check_draw unless tictactoe.winner >= 0
+          puts displaying_board.print_board(tictactoe.pmoves)
+        end
+        tictactoe.winner = -3 if pinput == 'exit'
       end
     end
+
   end
-  puts winner == -2 ? 'Game is a draw' : "HEY. Congratulations #{players[winner]}, great match!"
-  # cleaning board method
-  pmoves = [[], []]
-  board = ['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ']
-  winner = -1
-  players = [nil, nil]
-  # <---
+
+  puts tictactoe.exit_messages
+
+  displaying_board.clear_board
+  tictactoe.winner = -1
+  tictactoe.new_game
+
   puts 'Game is over'
   puts 'do you want to play again Y/N?'
-  input = gets.chomp # exit
+
+  input = ''
+  until %w[EXIT N Y YES NO].include? input
+    input = gets.chomp.to_s.upcase # exit
+    puts "#{input} not a valid option" unless %w[EXIT N Y YES NO].include? input
+  end
+
 end
 
 p 'Thank you for playing'
 p 'closing ....'
 exit
 
-# rubocop:enable Metrics/BlockNesting, Layout/LineLength, Metrics/BlockLength
+# rubocop:enable Metrics/BlockNesting
