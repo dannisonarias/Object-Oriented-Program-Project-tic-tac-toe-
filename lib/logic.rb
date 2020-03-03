@@ -1,5 +1,6 @@
 class GameLogic
   attr_accessor :winner, :players, :pmoves
+  attr_reader :invalid_move_messages
 
   def initialize()
     @players = []
@@ -8,6 +9,7 @@ class GameLogic
     @pmoves = [[], []]
     @winner = -1
     @wins = false
+    @invalid_move_messages = ''
   end
 
   def names_empty?
@@ -18,6 +20,7 @@ class GameLogic
     @players = [nil, nil]
     @pmoves = [[], []]
     @winner = -1
+    @invalid_move_messages = ''
   end
 
   def exit_messages
@@ -52,7 +55,7 @@ class GameLogic
     if @allowed_moves.any? { |move| @pinput == move }
       true
     else
-      puts "#{name}, enter a valid move"
+      @invalid_move_messages =  "#{name}, enter a valid move"
       false
     end
   end
@@ -62,7 +65,7 @@ class GameLogic
     if @pmoves[0].none? { |oldmove| oldmove == @pinput } && @pmoves[1].none? { |oldmove| oldmove == @pinput }
       true
     else
-      puts "#{name}, Move is takened!"
+      @invalid_move_messages = "#{name}, Move is takened!"
     end
   end
 end

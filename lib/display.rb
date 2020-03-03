@@ -7,6 +7,7 @@ class DisplayBoard
   end
 
   def print_board(array)
+    @matrix = ''
     @array = array
     @array[0].each do |x|
       @board [x - 1] = ' X'
@@ -14,11 +15,12 @@ class DisplayBoard
     @array[1].each do |x|
       @board [x - 1] = ' O'
     end
-    puts ''
-    puts "#{@board[0]}|#{@board[1]}|#{@board[2]}"
-    puts "#{@board[3]}|#{@board[4]}|#{@board[5]}"
-    puts "#{@board[6]}|#{@board[7]}|#{@board[8]}"
-    puts ''
+    @matrix += "\n"
+    @matrix += "#{@board[0]}|#{@board[1]}|#{@board[2]}\n"
+    @matrix += "#{@board[3]}|#{@board[4]}|#{@board[5]}\n"
+    @matrix += "#{@board[6]}|#{@board[7]}|#{@board[8]}\n"
+    @matrix += "\n"
+    return @matrix
   end
 
   def clear_board
