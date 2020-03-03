@@ -24,7 +24,6 @@ puts "  7 | 8 | 9 \n\n\n"
 until %w[exit N n].include? input
   tictactoe.winner = -1
 
-  # tictactoe.your_name
   if tictactoe.names_empty?
     puts 'Player 1. Enter your name'
     tictactoe.players[0] = gets.chomp
@@ -59,7 +58,7 @@ until %w[exit N n].include? input
 
   end
 
-  tictactoe.exit_messages
+  puts tictactoe.exit_messages
 
   displaying_board.clear_board
   tictactoe.winner = -1
