@@ -21,6 +21,7 @@ class GameLogic
     @pmoves = [[], []]
     @winner = -1
     @invalid_move_messages = ''
+    @wins = false
   end
 
   def exit_messages

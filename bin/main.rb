@@ -10,7 +10,6 @@ puts 'WELCOME TO TIC TAC TOE'
 puts 'Main menu.'
 puts '--------------'
 puts '1. New game'
-puts '2. Game Options'
 puts 'Type exit to leave game'
 
 input = gets.chomp.to_s.upcase
