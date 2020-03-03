@@ -27,7 +27,8 @@ Board Scheme (its the map you will be using to select positions on the board).
  -  4 | 5 | 6 
  -  7 | 8 | 9 
 
-5- If you want to select position 1 in the board. Type '1' and hit <enter>, when your name is prompted to enter your move.
+5- If you want to select position 1 in the board. Type '1' and hit enter-key, when your name is prompted to enter your move.
+
 6- After you enter your move, the program will show an empty board with a mark in the position you wanted to place your move.
 
 (Remember : The object of the game is to be the first player to get three in a row.)
