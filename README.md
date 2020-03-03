@@ -6,7 +6,7 @@ First Feature of the Tic tac toe
   We also create a similar method called #bubble_sort_by which sorts an array by accepting a block. 
 
 
-![screenshot](./app_video.gif)
+![app_video file](./app_video.gif)
 
 # Tic Tac Toe Instructions
 
