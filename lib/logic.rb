@@ -13,7 +13,7 @@ class GameLogic
   end
 
   def names_empty?
-    return @players[0].nil? || @players[1].nil?
+    @players[0].nil? || @players[1].nil?
   end
 
   def new_game
@@ -26,11 +26,11 @@ class GameLogic
   def exit_messages
     case @winner
     when -2
-      return'Game is a draw'
+      'Game is a draw'
     when -3
-      return 'User Exit'
+      'User Exit'
     else
-      return "HEY. Congratulations #{@players[@winner]}, great match!"
+      "HEY. Congratulations #{@players[@winner]}, great match!"
     end
   end
 
@@ -55,7 +55,7 @@ class GameLogic
     if @allowed_moves.any? { |move| @pinput == move }
       true
     else
-      @invalid_move_messages =  "#{name}, enter a valid move"
+      @invalid_move_messages = "#{name}, enter a valid move"
       false
     end
   end
@@ -66,7 +66,7 @@ class GameLogic
       true
     else
       @invalid_move_messages = "#{name}, Move is takened!"
-      return false
+      false
     end
   end
 end
