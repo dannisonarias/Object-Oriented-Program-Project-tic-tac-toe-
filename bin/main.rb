@@ -13,7 +13,7 @@ puts '1. New game'
 puts '2. Game Options'
 puts 'Type exit to leave game'
 
-input = gets.chomp
+input = gets.chomp.to_s.upcase
 exit if input == 'exit'
 
 puts 'Choose your position using the following scheme'
@@ -21,7 +21,7 @@ puts '  1 | 2 | 3 '
 puts '  4 | 5 | 6 '
 puts "  7 | 8 | 9 \n\n\n"
 
-until %w[exit N n].include? input
+until %w[EXIT N NO].include? input
   tictactoe.winner = -1
 
   if tictactoe.names_empty?
@@ -49,7 +49,7 @@ until %w[exit N n].include? input
 
           puts tictactoe.invalid_move_messages
           tictactoe.check_win(index)
-          tictactoe.check_draw
+          tictactoe.check_draw unless tictactoe.winner >= 0
           puts displaying_board.print_board(tictactoe.pmoves)
         end
         tictactoe.winner = -3 if pinput == 'exit'
@@ -66,7 +66,12 @@ until %w[exit N n].include? input
 
   puts 'Game is over'
   puts 'do you want to play again Y/N?'
-  input = gets.chomp # exit
+
+  input = ''
+  until %w[EXIT N Y YES NO].include? input
+    input = gets.chomp.to_s.upcase # exit
+    puts "#{input} not a valid option" unless %w[EXIT N Y YES NO].include? input
+  end
 
 end
 
@@ -75,7 +80,3 @@ p 'closing ....'
 exit
 
 # rubocop:enable Metrics/BlockNesting
-
-#moves are being stored even if the move is takened
-#game is a draw even if all positions are not filled
-# do you want to play again y/n responses to any truthy value such as integeer 7 = plays again

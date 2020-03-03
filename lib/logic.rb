@@ -66,6 +66,7 @@ class GameLogic
       true
     else
       @invalid_move_messages = "#{name}, Move is takened!"
+      return false
     end
   end
 end
