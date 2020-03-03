@@ -27,15 +27,15 @@ Board Scheme (its the map you will be using to select positions on the board).
  -  4 | 5 | 6 
  -  7 | 8 | 9 
 
-4- If you want to select position 1 in the board. Type '1' and hit <enter>, when your name is prompted to enter your move.
-5- After you enter your move, the program will show an empty board with a mark in the position you wanted to place your move.
+5- If you want to select position 1 in the board. Type '1' and hit <enter>, when your name is prompted to enter your move.
+6- After you enter your move, the program will show an empty board with a mark in the position you wanted to place your move.
 
 (Remember : The object of the game is to be the first player to get three in a row.)
 
-6- When either play completes the objective of creating a row with their positions the game will congratulate the winner!
+7- When either play completes the objective of creating a row with their positions the game will congratulate the winner!
 Otherwise if no player has won and all the positions are filled the game will be declared a draw!
 
-7- You will be asked if you want to play again , type 'Y' or 'N' for yes and no. 
+8- You will be asked if you want to play again , type 'Y' or 'N' for yes and no. 
 
 ## The video below is a small segment of what to do when you are playing the game.
 
