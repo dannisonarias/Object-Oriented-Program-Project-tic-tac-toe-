@@ -2,11 +2,7 @@ First Feature of the Tic tac toe
 
 # Object-Oriented Programming - Tic Tac Toe Game
 
-> We build a method #bubble_sort that takes an array and returns a sorted array. It uses the bubble sort methodology
-  We also create a similar method called #bubble_sort_by which sorts an array by accepting a block. 
-
-
-![app_video file](./app_video.gif)
+In this project, we build a Tic Tac Toe game. The main goal is to put into practice the main concepts of Object Oriented Programming. Particularly, classes and access to their attributes.
 
 # Tic Tac Toe Instructions
 
@@ -35,6 +31,10 @@ Board Scheme (its the map you will be using to select positions on the board)
 Otherwise if no player has won and all the positions are filled the game will be declared a draw!
 
 7- You will be asked if you want to play again , type 'Y' or 'N' for yes and no. 
+
+## The video below is a small segment of what to do when you are playing the game.
+
+![app_video file](./app_video.gif)
 
 
 ## Built With
