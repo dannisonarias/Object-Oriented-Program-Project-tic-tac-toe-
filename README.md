@@ -12,15 +12,20 @@ Once all the spaces are filled if there is no winner than it is a draw.
 Play the best of three alternating who takes the first turn.
 
 # How to play the game
-1- Start the game by executing: ./main.rb inside the repository /bin folder
-2- Select New Game by Typing '1'(if you wish to exit type the word 'exit')
+1- Start the game by executing: ./main.rb inside the repository /bin folder.
+
+2- Select New Game by Typing '1'(if you wish to exit type the word 'exit').
+
 3- After selecting option 1 (new game), the program will ask for each player's name.
+
 4- After the names are introduced, the game will show the board scheme you should follow to enter your moves, and prompt each game to enter a move.
 
-Board Scheme (its the map you will be using to select positions on the board)
-   1 | 2 | 3 
-   4 | 5 | 6 
-   7 | 8 | 9 
+
+Board Scheme (its the map you will be using to select positions on the board).
+
+ -  1 | 2 | 3 
+ -  4 | 5 | 6 
+ -  7 | 8 | 9 
 
 4- If you want to select position 1 in the board. Type '1' and hit <enter>, when your name is prompted to enter your move.
 5- After you enter your move, the program will show an empty board with a mark in the position you wanted to place your move.
