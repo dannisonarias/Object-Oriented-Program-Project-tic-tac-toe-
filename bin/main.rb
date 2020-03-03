@@ -75,3 +75,7 @@ p 'closing ....'
 exit
 
 # rubocop:enable Metrics/BlockNesting
+
+#moves are being stored even if the move is takened
+#game is a draw even if all positions are not filled
+# do you want to play again y/n responses to any truthy value such as integeer 7 = plays again
