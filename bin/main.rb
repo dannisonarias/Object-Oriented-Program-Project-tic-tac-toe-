@@ -24,7 +24,13 @@ puts "  7 | 8 | 9 \n\n\n"
 until %w[exit N n].include? input
   tictactoe.winner = -1
 
-  tictactoe.your_name
+  # tictactoe.your_name
+  if tictactoe.names_empty?
+    puts 'Player 1. Enter your name'
+    tictactoe.players[0] = gets.chomp
+    puts 'Player 2. Enter your name'
+    tictactoe.players[1] = gets.chomp
+  end
 
   while tictactoe.winner == -1
     tictactoe.players.each_with_index do |name, index|
@@ -48,6 +54,7 @@ until %w[exit N n].include? input
         end
         tictactoe.winner = -3 if pinput == 'exit'
       end
+
     end
 
   end
