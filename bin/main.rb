@@ -47,13 +47,13 @@ until %w[exit N n].include? input
             pinput = nil
           end
 
+          puts tictactoe.invalid_move_messages
           tictactoe.check_win(index)
           tictactoe.check_draw
-          displaying_board.print_board(tictactoe.pmoves)
+          puts displaying_board.print_board(tictactoe.pmoves)
         end
         tictactoe.winner = -3 if pinput == 'exit'
       end
-
     end
 
   end
