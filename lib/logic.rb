@@ -40,11 +40,13 @@ class GameLogic
       @wins = true if (array - @pmoves[index]).empty?
       @winner = index if @wins
     end
+    @winner
   end
 
   def check_draw
     @winner = -2 if @pmoves[0].length + @pmoves[1].length == 9
     @wins = false
+    @winner
   end
 
   def store_move(index)
