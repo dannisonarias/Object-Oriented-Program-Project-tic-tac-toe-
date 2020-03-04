@@ -73,5 +73,4 @@ class GameLogic
     @invalid_move_messages = ''
     @wins = false
   end
-  
 end
