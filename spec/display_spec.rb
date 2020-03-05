@@ -15,5 +15,4 @@ RSpec.describe DisplayBoard do
       expect(display.clear_board).to eql(['  ', '  ', '  ', '  ', '  ', '  ', '  ', '  ', '  '])
     end
   end
-  
 end
