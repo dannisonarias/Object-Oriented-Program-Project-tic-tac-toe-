@@ -1,5 +1,5 @@
 class GameLogic
-  attr_accessor :winner, :players, :pmoves
+  attr_accessor :winner, :players, :pmoves, :pinput
   attr_reader :invalid_move_messages
 
   def initialize()
@@ -14,14 +14,6 @@ class GameLogic
 
   def names_empty?
     @players[0].nil? || @players[1].nil?
-  end
-
-  def new_game
-    @players = [nil, nil]
-    @pmoves = [[], []]
-    @winner = -1
-    @invalid_move_messages = ''
-    @wins = false
   end
 
   def exit_messages
@@ -40,15 +32,13 @@ class GameLogic
       @wins = true if (array - @pmoves[index]).empty?
       @winner = index if @wins
     end
+    @winner
   end
 
   def check_draw
     @winner = -2 if @pmoves[0].length + @pmoves[1].length == 9
     @wins = false
-  end
-
-  def store_move(index)
-    @pmoves[index] << @pinput
+    @winner
   end
 
   def allowed_move?(input, name)
@@ -69,5 +59,18 @@ class GameLogic
       @invalid_move_messages = "#{name}, Move is takened!"
       false
     end
+  end
+
+  def store_move(index)
+    @pmoves[index] << @pinput
+    @pinput
+  end
+
+  def new_game
+    @players = [nil, nil]
+    @pmoves = [[], []]
+    @winner = -1
+    @invalid_move_messages = ''
+    @wins = false
   end
 end
